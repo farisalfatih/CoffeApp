@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
-import { getAuth, signInWithEmailAndPassword, initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import { initializeApp } from 'firebase/app';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 
 // Firebase configuration
 const firebaseConfig = {
@@ -18,12 +16,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+import { initializeApp } from 'firebase/app';
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firebase Auth with AsyncStorage persistence
-const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(AsyncStorage)
-});
+// Inisialisasi Firebase Auth
+const auth = getAuth(app);
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -53,17 +50,6 @@ const SignIn = () => {
         Alert.alert('Error', errorMessage);
       });
   };
-
-  useEffect(() => {
-    // Optionally, check if the user is already logged in when the component mounts
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
-        navigation.navigate('Home'); // Redirect to Home screen if user is already logged in
-      }
-    });
-
-    return unsubscribe; // Clean up the listener when the component unmounts
-  }, []);
 
   return (
     <View style={styles.container}>
