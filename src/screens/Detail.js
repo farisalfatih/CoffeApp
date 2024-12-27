@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     color: '#4e2e1f',
   },
   searchBar: {
-    width: '96%',
+    width: '80%',
     padding: 10,
     borderWidth: 2,
     borderColor: '#4e2e1f',
@@ -180,12 +180,12 @@ const styles = StyleSheet.create({
   categories: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   categoryButton: {
-    padding: 15,
+    padding: 10,
     borderRadius: 25,
-    marginHorizontal: 15,
+    marginHorizontal: 1,
     backgroundColor: '#d4b895',
     borderRadius: 25,
     borderWidth: 2,

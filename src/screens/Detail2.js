@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native';
+import { View, ScrollView, Text, Image, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -71,109 +71,111 @@ const Detail2 = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>SecangkirCerita</Text>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <Text style={styles.title}>SecangkirCerita</Text>
 
-      {/* Back and Love Icons */}
-      <View style={styles.iconContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.iconBack}>
-          <Icon name="arrow-left" size={30} color="#4e2e1f" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => alert('Loved!')} style={styles.iconLove}>
-          <Icon name="heart" size={30} color="#4e2e1f" />
-        </TouchableOpacity>
-      </View>
+        {/* Back and Love Icons */}
+        <View style={styles.iconContainer}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.iconBack}>
+            <Icon name="arrow-left" size={30} color="#4e2e1f" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => alert('Loved!')} style={styles.iconLove}>
+            <Icon name="heart" size={30} color="#4e2e1f" />
+          </TouchableOpacity>
+        </View>
 
-      <Text style={styles.greeting}>My Cart</Text>
+        <Text style={styles.greeting}>My Cart</Text>
 
-      {/* Frappuccino Item */}
-      <View style={styles.largeSpecialItem}>
-        <View style={styles.cartItem}>
-          <Image source={require('../images/frappucino.jpg')} style={styles.image} />
-          <View style={styles.itemDetails}>
-            <Text style={styles.itemTitle}>Frappuccino</Text>
-            <Text>Small, Oat Milk</Text>
-            <Text>Rp {frappuccinoPrice}</Text>
-            <View style={styles.counter}>
-              <View style={styles.counterWrapper}>
-                <TouchableOpacity onPress={() => setFrappuccinoCount(Math.max(frappuccinoCount - 1, 1))}>
-                  <Text style={styles.counterButton}>-</Text>
-                </TouchableOpacity>
-                <Text style={styles.counterText}>{frappuccinoCount}</Text>
-                <TouchableOpacity onPress={() => setFrappuccinoCount(frappuccinoCount + 1)}>
-                  <Text style={styles.counterButton}>+</Text>
-                </TouchableOpacity>
+        {/* Frappuccino Item */}
+        <View style={styles.largeSpecialItem}>
+          <View style={styles.cartItem}>
+            <Image source={require('../images/frappucino.jpg')} style={styles.image} />
+            <View style={styles.itemDetails}>
+              <Text style={styles.itemTitle}>Frappuccino</Text>
+              <Text>Small, Oat Milk</Text>
+              <Text>Rp {frappuccinoPrice}</Text>
+              <View style={styles.counter}>
+                <View style={styles.counterWrapper}>
+                  <TouchableOpacity onPress={() => setFrappuccinoCount(Math.max(frappuccinoCount - 1, 1))}>
+                    <Text style={styles.counterButton}>-</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.counterText}>{frappuccinoCount}</Text>
+                  <TouchableOpacity onPress={() => setFrappuccinoCount(frappuccinoCount + 1)}>
+                    <Text style={styles.counterButton}>+</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
+              <TouchableOpacity onPress={() => handleRemoveItem('frappuccino')}>
+                <Text style={styles.removeItem}>Remove</Text>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => handleRemoveItem('frappuccino')}>
-              <Text style={styles.removeItem}>Remove</Text>
-            </TouchableOpacity>
           </View>
         </View>
-      </View>
 
-      {/* Cold Brew Item */}
-      <View style={styles.largeSpecialItem}>
-        <View style={styles.cartItem}>
-          <Image source={require('../images/coldBrew.jpg')} style={styles.image} />
-          <View style={styles.itemDetails}>
-            <Text style={styles.itemTitle}>Cold Brew</Text>
-            <Text>Small, Skim Milk</Text>
-            <Text>Chocolate syrup</Text>
-            <Text>Rp {coldBrewPrice}</Text>
-            <View style={styles.counter}>
-              <View style={styles.counterWrapper}>
-                <TouchableOpacity onPress={() => setColdBrewCount(Math.max(coldBrewCount - 1, 1))}>
-                  <Text style={styles.counterButton}>-</Text>
-                </TouchableOpacity>
-                <Text style={styles.counterText}>{coldBrewCount}</Text>
-                <TouchableOpacity onPress={() => setColdBrewCount(coldBrewCount + 1)}>
-                  <Text style={styles.counterButton}>+</Text>
-                </TouchableOpacity>
+        {/* Cold Brew Item */}
+        <View style={styles.largeSpecialItem}>
+          <View style={styles.cartItem}>
+            <Image source={require('../images/coldBrew.jpg')} style={styles.image} />
+            <View style={styles.itemDetails}>
+              <Text style={styles.itemTitle}>Cold Brew</Text>
+              <Text>Small, Skim Milk</Text>
+              <Text>Chocolate syrup</Text>
+              <Text>Rp {coldBrewPrice}</Text>
+              <View style={styles.counter}>
+                <View style={styles.counterWrapper}>
+                  <TouchableOpacity onPress={() => setColdBrewCount(Math.max(coldBrewCount - 1, 1))}>
+                    <Text style={styles.counterButton}>-</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.counterText}>{coldBrewCount}</Text>
+                  <TouchableOpacity onPress={() => setColdBrewCount(coldBrewCount + 1)}>
+                    <Text style={styles.counterButton}>+</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
+              <TouchableOpacity onPress={() => handleRemoveItem('coldBrew')}>
+                <Text style={styles.removeItem}>Remove</Text>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => handleRemoveItem('coldBrew')}>
-              <Text style={styles.removeItem}>Remove</Text>
-            </TouchableOpacity>
           </View>
         </View>
-      </View>
 
-      {/* Promo Code Section */}
-      <View style={styles.summary}>
-        <TextInput 
-          placeholder="Promo code" 
-          style={styles.promoCode} 
-          placeholderTextColor="#000" 
-          value={promoCode}
-          onChangeText={setPromoCode}
-        />
-        <TouchableOpacity style={styles.applyButton} onPress={handlePromoCodeApply}>
-          <Text style={styles.applyButtonText}>Apply</Text>
+        {/* Promo Code Section */}
+        <View style={styles.summary}>
+          <TextInput 
+            placeholder="Promo code" 
+            style={styles.promoCode} 
+            placeholderTextColor="#000" 
+            value={promoCode}
+            onChangeText={setPromoCode}
+          />
+          <TouchableOpacity style={styles.applyButton} onPress={handlePromoCodeApply}>
+            <Text style={styles.applyButtonText}>Apply</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Cart Summary Section */}
+        <View style={styles.summaryContainer}>
+          <View style={styles.summaryRow}>
+            <Text style={styles.boldText}>Cart</Text>
+            <Text style={styles.boldText}>Rp {frappuccinoCount * frappuccinoPrice + coldBrewCount * coldBrewPrice}</Text>
+          </View>
+          <View style={styles.summaryRow}>
+            <Text style={styles.boldText}>Discount</Text>
+            <Text style={styles.boldText}>{isPromoApplied ? `${discount * 100}%` : '0%'}</Text>
+          </View>
+          <View style={styles.summaryRow}>
+            <Text style={styles.boldText}>Total</Text>
+            <Text style={styles.boldText}>Rp {calculateTotal()}</Text>
+          </View>
+        </View>
+
+        {/* Add margin to create more space below the summary */}
+        <View style={styles.spacing} />
+
+        <TouchableOpacity style={styles.checkoutButton} onPress={() => navigation.navigate('DeliveryAddress')}>
+          <Text style={styles.checkoutText}>Check Out</Text>
         </TouchableOpacity>
-      </View>
-
-      {/* Cart Summary Section */}
-      <View style={styles.summaryContainer}>
-        <View style={styles.summaryRow}>
-          <Text style={styles.boldText}>Cart</Text>
-          <Text style={styles.boldText}>Rp {frappuccinoCount * frappuccinoPrice + coldBrewCount * coldBrewPrice}</Text>
-        </View>
-        <View style={styles.summaryRow}>
-          <Text style={styles.boldText}>Discount</Text>
-          <Text style={styles.boldText}>{isPromoApplied ? `${discount * 100}%` : '0%'}</Text>
-        </View>
-        <View style={styles.summaryRow}>
-          <Text style={styles.boldText}>Total</Text>
-          <Text style={styles.boldText}>Rp {calculateTotal()}</Text>
-        </View>
-      </View>
-
-      {/* Add margin to create more space below the summary */}
-      <View style={styles.spacing} />
-
-      <TouchableOpacity style={styles.checkoutButton} onPress={() => navigation.navigate('DeliveryAddress')}>
-        <Text style={styles.checkoutText}>Check Out</Text>
-      </TouchableOpacity>
+      </ScrollView>
 
       {/* Footer Navigation */}
       <View style={styles.footer}>
@@ -189,7 +191,7 @@ const Detail2 = () => {
         <TouchableOpacity style={styles.footerButton}>
           <Icon name="shopping-cart" size={30} color="#4e2e1f" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}onPress={() => navigation.navigate('DeliveryAddress')}>
+        <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('DeliveryAddress')}>
           <Icon name="user" size={28} color="#4e2e1f" />
         </TouchableOpacity>
       </View>
@@ -204,6 +206,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#f3e0d1',
+  },
+  scrollContent: {
+    paddingBottom: 50,
   },
   greeting: {
     marginVertical: 10,
