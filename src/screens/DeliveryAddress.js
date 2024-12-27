@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     width: '100%',
     position: 'absolute',
     top: 60,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
   },
   iconBack: {
     padding: 5,
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   title: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 30,
