@@ -16,19 +16,19 @@ import SplashScreen from './src/screens/SplashScreen';
 const Stack = createNativeStackNavigator();
 
 function App() {
-  const [initialRoute, setInitialRoute] = useState('SplashScreen'); // Default screen is SplashScreen
+  const [initialRoute, setInitialRoute] = useState('SplashScreen'); 
   const auth = getAuth();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setInitialRoute('Home'); // Redirect to Home if user is logged in
+        setInitialRoute('Home');
       } else {
-        setInitialRoute('SignIn'); // Redirect to SignIn if user is not logged in
+        setInitialRoute('SignIn'); 
       }
     });
 
-    return unsubscribe; // Cleanup listener when component unmounts
+    return unsubscribe; 
   }, [auth]);
 
   return (
